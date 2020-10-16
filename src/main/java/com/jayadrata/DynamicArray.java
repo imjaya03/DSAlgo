@@ -30,6 +30,15 @@ public class DynamicArray {
         array[index] = data;
     }
 
+    /** BIG-O Complexity -> Time: O(n) */
+    public boolean contains(int data){
+        for(int i=0; i<count; i++){
+            if(array[i] == data)
+                return true;
+        }
+        return false;
+    }
+
     /** BIG-O Complexity -> Time: O(1) */
     public void insert(int data){
         if(isFull())
