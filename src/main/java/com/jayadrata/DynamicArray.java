@@ -19,7 +19,7 @@ public class DynamicArray {
     /** BIG-O Time Complexity O(1) */
     public int get(int index){
         if(isInvalidIndex(index))
-            throw new IllegalStateException();
+            throw new IllegalArgumentException();
         return array[index];
     }
 
@@ -35,6 +35,27 @@ public class DynamicArray {
         if(isFull())
             increaseCapacity();
         array[count++] = data;
+    }
+
+    /** BIG-O Complexity -> Time: O(n) */
+    public void insertAt(int index, int data){
+        count++;
+       if(isInvalidIndex(index))
+           throw new IllegalArgumentException();
+       if(isFull())
+           increaseCapacity();
+       var right = new int[count - index];
+       var newArray = new int [count];
+       int x=0;
+       for(int i=0; i<count; i++){
+           if(i==index){
+               newArray[i] = data;
+               x=1;
+               continue;
+           }
+           newArray[i] = array[i-x];
+       }
+       array = newArray;
     }
 
     /** BIG-O Complexity -> Time: O(n) */
