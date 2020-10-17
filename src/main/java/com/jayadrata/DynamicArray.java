@@ -1,37 +1,39 @@
 package com.jayadrata;
 
-public class DynamicArray {
-    private int[] array;
+@SuppressWarnings("unchecked")
+public class DynamicArray<T> {
+    private T[] array;
     private int count;
 
     /** BIG-O Complexity -> Time: O(1) */
     public DynamicArray(){
-        array = new int[5];
+        array = (T[])new Object[5];
     }
 
     /** BIG-O Complexity -> Time: O(1) */
     public DynamicArray(int initialCapacity){
         if(initialCapacity<=0)
             throw new IllegalArgumentException();
-        array = new int[initialCapacity];
+        array = (T[])new Object[initialCapacity];
     }
 
-    /** BIG-O Time Complexity O(1) */
-    public int get(int index){
+
+    /** BIG-O Complexity -> Time: O(1) */
+    public T get(int index){
         if(isInvalidIndex(index))
             throw new IllegalArgumentException();
         return array[index];
     }
 
     /** BIG-O Complexity -> Time: O(n) */
-    public void set(int index, int data){
+    public void set(int index, T data){
         if(isInvalidIndex(index))
             throw new IllegalArgumentException();
         array[index] = data;
     }
 
     /** BIG-O Complexity -> Time: O(n) */
-    public boolean contains(int data){
+    public boolean contains(T data){
         for(int i=0; i<count; i++){
             if(array[i] == data)
                 return true;
@@ -40,21 +42,21 @@ public class DynamicArray {
     }
 
     /** BIG-O Complexity -> Time: O(1) */
-    public void insert(int data){
+    public void insert(T data){
         if(isFull())
             increaseCapacity();
         array[count++] = data;
     }
 
     /** BIG-O Complexity -> Time: O(n) */
-    public void insertAt(int index, int data){
+    public void insertAt(int index, T data){
         count++;
        if(isInvalidIndex(index))
            throw new IllegalArgumentException();
        if(isFull())
            increaseCapacity();
        var right = new int[count - index];
-       var newArray = new int [count];
+       var newArray = (T[])new Object[count];
        int x=0;
        for(int i=0; i<count; i++){
            if(i==index){
@@ -88,7 +90,7 @@ public class DynamicArray {
     }
 
     /** BIG-O Complexity -> Time: O(n) */
-    public int indexOf(int data){
+    public int indexOf(T data){
         for(int i=0; i<count; i++)
             if(array[i]==data)
                 return i;
@@ -119,7 +121,7 @@ public class DynamicArray {
     /** BIG-O Complexity -> Time: O(n) */
     private void increaseCapacity(){
         var temp = array;
-        array = new int[array.length*2];
+        array = (T[])new Object[array.length*2];
         for(int i=0; i<temp.length; i++){
             array[i] = temp[i];
         }
